@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    $categories = \App\Models\Products\Category::parents()->get();
+    $categories = \App\Models\Products\Category::parents()
+        ->ordered()
+        ->get();
     return $categories;
 });
