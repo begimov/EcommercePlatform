@@ -10,4 +10,9 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
     }
+
+    public function scopeParents($query)
+    {
+        return $query->whereNull('parent_id');
+    }
 }
