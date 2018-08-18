@@ -3,11 +3,14 @@
 namespace App\Models\Products;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Traits\HasChildren;
+use App\Models\Traits\{
+    HasChildren,
+    isOrderable
+};
 
 class Category extends Model
 {
-    use HasChildren;
+    use HasChildren, isOrderable;
 
     protected $fillable = [
         'name', 'slug', 'order'
@@ -16,10 +19,5 @@ class Category extends Model
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
-    }
-
-    public function scopeOrdered($query, $direction = 'asc')
-    {
-        return $query->orderBy('order', $direction);
     }
 }
