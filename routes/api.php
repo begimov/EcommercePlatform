@@ -2,9 +2,4 @@
 
 use Illuminate\Http\Request;
 
-Route::get('/', function () {
-    $categories = \App\Models\Products\Category::parents()
-        ->ordered()
-        ->get();
-    return $categories;
-});
+Route::resource('categories', 'Products\CategoryController');
