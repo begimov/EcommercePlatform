@@ -38,4 +38,40 @@ class CategoryIndexTest extends TestCase
                     'slug' => $categories[1]->slug
                 ]);
     }
+
+    public function test_returns_only_parent_categories()
+    {
+        $category  = factory(Category::class)->create();
+
+        factory(Category::class)->create();
+
+        $category->children()->save(
+            $subcategory = factory(Category::class)->create()
+        );
+
+        $this->json('GET', 'api/categories')
+            ->assertJsonFragment(
+                [
+                    'slug' => $category->slug
+                ]
+            )
+            ->assertJsonCount(2, 'data');
+    }
+
+    public function test_returns_categories_in_order()
+    {
+        $category1  = factory(Category::class)->create([
+            'order' => 2
+        ]);
+
+        $category2  = factory(Category::class)->create([
+            'order' => 1
+        ]);
+
+        $this->json('GET', 'api/categories')
+            ->assertSeeInOrder([
+                $category2->name,
+                $category1->name,
+            ]);
+    }
 }
