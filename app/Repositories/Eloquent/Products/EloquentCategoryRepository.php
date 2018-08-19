@@ -12,4 +12,18 @@ class EloquentCategoryRepository extends EloquentRepositoryAbstract implements C
     {
         return Category::class;
     }
+
+    public function parents()
+    {
+        $this->entity = $this->entity->parents();
+
+        return $this;
+    }
+
+    public function ordered()
+    {
+        $this->entity = $this->entity->ordered();
+        
+        return $this;
+    }
 }

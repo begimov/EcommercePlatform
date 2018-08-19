@@ -20,11 +20,14 @@ class CategoryController extends Controller
 
     public function index()
     {
+        $categories = $this->categories
+            ->parents()
+            ->ordered()
+            // ->with('children')
+            ->get();
+
         return CategoryResource::collection(
-            Category::parents()
-                ->ordered()
-                ->with('children')
-                ->get()
+            $categories
         );
     }
 }
