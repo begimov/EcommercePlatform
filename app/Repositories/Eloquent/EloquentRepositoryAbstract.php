@@ -4,7 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Repositories\Exceptions\NoEntityDefined;
 use App\Repositories\Contracts\RepositoryInterface;
-use App\Repositories\Contracts\Criteria\CriteriaInterface;
+use App\Repositories\Contracts\CriteriaInterface;
 
 abstract class EloquentRepositoryAbstract implements RepositoryInterface, CriteriaInterface
 {

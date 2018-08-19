@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Contracts\Criteria;
+namespace App\Repositories\Contracts;
 
 interface CriteriaInterface
 {
