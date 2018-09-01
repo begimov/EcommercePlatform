@@ -12,6 +12,11 @@ class ProductResource extends ProductIndexResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return array_merge(
+            parent::toArray($request),
+            [
+                'variations' => []
+            ]
+        );
     }
 }
