@@ -20,4 +20,11 @@ class ProductController extends Controller
         
         return ProductIndexResource::collection($products);
     }
+
+    public function show($slug)
+    {
+        $product = $this->products->getByRouteKeyName($slug);
+
+        return new ProductIndexResource($product);
+    }
 }
