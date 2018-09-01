@@ -13,12 +13,14 @@ class ScopesAbstract
         $this->request = $request;
     }
 
-    public function scope($repository)
+    public function scope($builder)
     {
         foreach ($this->getScopes() as $scope => $value) {
-            $this->resolveScope($scope)->scope($repository, $value);
+
+            $builder = $this->resolveScope($scope)->scope($builder, $value);
+
         }
-        return $repository;
+        return $builder;
     }
 
     protected function resolveScope($scope)
@@ -29,9 +31,8 @@ class ScopesAbstract
     protected function getScopes()
     {
         return array_filter(
-            $this->request->only(
-                array_keys($this->scopes)
-            )
+
+            $this->request->only(array_keys($this->scopes))
         );
     }
 }

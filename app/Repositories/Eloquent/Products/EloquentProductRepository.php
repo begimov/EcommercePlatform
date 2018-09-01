@@ -16,6 +16,8 @@ class EloquentProductRepository extends EloquentRepositoryAbstract implements Pr
 
     public function scope($request)
     {
-        return (new ProductScopes($request))->scope($this);
+        $this->entity = (new ProductScopes($request))->scope($this->entity);
+
+        return $this;
     }
 }

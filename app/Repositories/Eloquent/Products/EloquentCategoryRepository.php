@@ -26,4 +26,9 @@ class EloquentCategoryRepository extends EloquentRepositoryAbstract implements C
         
         return $this;
     }
+
+    public function scope($request)
+    {
+        return $this;
+    }
 }

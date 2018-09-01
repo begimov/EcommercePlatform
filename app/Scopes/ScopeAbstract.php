@@ -4,5 +4,5 @@ namespace App\Scopes;
 
 abstract class ScopeAbstract
 {
-    abstract public function scope($repository, $value);
+    abstract public function scope($builder, $value);
 }

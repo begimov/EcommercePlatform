@@ -7,7 +7,7 @@ use App\Scopes\Products\Product\CategoryScope;
 
 class ProductScopes extends ScopesAbstract
 {
-    protected $filters = [
+    protected $scopes = [
         'category' => CategoryScope::class,
     ];
 }
