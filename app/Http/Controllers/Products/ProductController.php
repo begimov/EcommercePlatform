@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Products;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Products\ProductIndexResource;
 use App\Repositories\Contracts\Products\ProductRepository;
 
 class ProductController extends Controller
@@ -16,6 +17,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->products->get();
-        dd($products);
+        
+        return ProductIndexResource::collection($products);
     }
 }
