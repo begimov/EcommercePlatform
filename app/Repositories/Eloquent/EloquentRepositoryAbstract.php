@@ -20,6 +20,11 @@ abstract class EloquentRepositoryAbstract implements RepositoryInterface, Criter
         return $this->entity->get();
     }
 
+    public function paginate($by)
+    {
+        return $this->entity->paginate($by);
+    }
+
     public function withCriteria(array $criteria)
     {
         foreach ($criteria as $criterion) {
