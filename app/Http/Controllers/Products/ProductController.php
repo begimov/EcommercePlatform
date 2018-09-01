@@ -26,6 +26,10 @@ class ProductController extends Controller
     {
         $product = $this->products->getByRouteKeyName($slug);
 
+        if (!$product) {
+            return abort(404);
+        }
+
         return new ProductResource($product);
     }
 }
