@@ -6,7 +6,10 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-use App\Models\Products\Category;
+use App\Models\Products\{
+    Category,
+    Product
+};
 
 class CategoryTest extends TestCase
 {
@@ -39,5 +42,17 @@ class CategoryTest extends TestCase
         ]);
 
         $this->assertEquals($category->name, Category::ordered()->first()->name);
+    }
+
+    public function test_has_several_products()
+    {
+
+        $category = factory(Category::class)->create();
+
+        $product = factory(Product::class)->create();
+
+        $category->products()->save($product);
+
+        $this->assertEquals($category->products[0]->slug, $product->slug);
     }
 }
