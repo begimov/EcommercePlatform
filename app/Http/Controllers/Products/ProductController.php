@@ -15,6 +15,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        //
+        $products = $this->products->get();
+        dd($products);
     }
 }
