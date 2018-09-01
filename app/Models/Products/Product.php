@@ -12,6 +12,11 @@ class Product extends Model
         return 'slug';
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
     public function scopeFilter($builder, $repository, $request)
     {
         return (new ProductFilters($request))->filter($repository);
