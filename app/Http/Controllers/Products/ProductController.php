@@ -15,9 +15,11 @@ class ProductController extends Controller
         $this->products = $products;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = $this->products->paginate(10);
+        $products = $this->products
+            ->filter($request)
+            ->paginate(10);
         
         return ProductIndexResource::collection($products);
     }
