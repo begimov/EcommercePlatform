@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Products;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Products\ProductResource;
 use App\Http\Resources\Products\ProductIndexResource;
 use App\Repositories\Contracts\Products\ProductRepository;
 
@@ -25,8 +26,6 @@ class ProductController extends Controller
     {
         $product = $this->products->getByRouteKeyName($slug);
 
-        dd($product);
-
-        return new ProductIndexResource($product);
+        return new ProductResource($product);
     }
 }
