@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Filters\Products\Product;
+namespace App\Scopes\Products\Product;
 
-use App\Filters\FilterAbstract;
+use App\Scopes\ScopeAbstract;
 use App\Repositories\Eloquent\Criteria\WhereHas;
 
-class CategoryFilter extends FilterAbstract
+class CategoryScope extends ScopeAbstract
 {
     public function filter($repository, $value)
     {

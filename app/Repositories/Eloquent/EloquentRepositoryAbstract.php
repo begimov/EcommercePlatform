@@ -40,10 +40,7 @@ abstract class EloquentRepositoryAbstract implements RepositoryInterface, Criter
             ->first();
     }
 
-    public function filter($request)
-    {
-        return $this->entity->filter($this, $request);
-    }
+    abstract public function scope($request); 
 
     protected function resolveEntity()
     {
