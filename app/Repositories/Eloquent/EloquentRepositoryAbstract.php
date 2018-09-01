@@ -33,6 +33,13 @@ abstract class EloquentRepositoryAbstract implements RepositoryInterface, Criter
         return $this;
     }
 
+    public function getByRouteKeyName($value)
+    {       
+        return $this->entity
+            ->where($this->entity->getRouteKeyName(), $value)
+            ->first();
+    }
+
     protected function resolveEntity()
     {
         if (!method_exists($this, 'entity')) {

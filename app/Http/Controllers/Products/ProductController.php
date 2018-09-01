@@ -25,6 +25,8 @@ class ProductController extends Controller
     {
         $product = $this->products->getByRouteKeyName($slug);
 
+        dd($product);
+
         return new ProductIndexResource($product);
     }
 }
