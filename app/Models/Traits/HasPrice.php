@@ -2,26 +2,17 @@
 
 namespace App\Models\Traits;
 
-use Money\Money;
-use Money\Currency;
-use NumberFormatter;
-use Money\Currencies\ISOCurrencies;
-use Money\Formatter\IntlMoneyFormatter;
+use App\Services\App\Money;
 
 trait HasPrice
 {
     public function getPriceAttribute($price)
     {
-        return new Money($price, new Currency('RUB'));
+        return new Money($price);
     }
 
     public function getFormattedPriceAttribute()
     {
-        $formatter = new IntlMoneyFormatter(
-            new NumberFormatter('ru_RU', NumberFormatter::CURRENCY),
-            new ISOCurrencies()
-        );
-
-        return $formatter->format($this->price);
+        return $this->price->formatted();
     }
 }
