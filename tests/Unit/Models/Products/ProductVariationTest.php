@@ -60,4 +60,34 @@ class ProductVariationTest extends TestCase
 
         $this->assertEquals($product->price->amount(), $productVariation->price->amount());
     }
+
+    public function test_checks_if_price_does_not_differ()
+    {
+        $product = factory(Product::class)->create([
+            'price' => 100000
+        ]);
+
+        $product->variations()->save(
+            $productVariation = factory(ProductVariation::class)->create([
+                'price' => null
+            ])
+        );
+
+        $this->assertFalse($productVariation->priceDiffers());
+    }
+
+    public function test_checks_if_price_differs()
+    {
+        $product = factory(Product::class)->create([
+            'price' => 100000
+        ]);
+
+        $product->variations()->save(
+            $productVariation = factory(ProductVariation::class)->create([
+                'price' => 200000
+            ])
+        );
+
+        $this->assertTrue($productVariation->priceDiffers());
+    }
 }
