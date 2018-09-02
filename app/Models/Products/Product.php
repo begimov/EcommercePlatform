@@ -28,6 +28,11 @@ class Product extends Model
 
     public function getFormattedPriceAttribute()
     {
-        return '6000 руб.';
+        $formatter = new \Money\Formatter\IntlMoneyFormatter(
+            new \NumberFormatter('ru_RU', \NumberFormatter::CURRENCY),
+            new \Money\Currencies\ISOCurrencies()
+        );
+
+        return $formatter->format($this->price);
     }
 }
