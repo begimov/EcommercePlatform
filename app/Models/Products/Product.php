@@ -20,4 +20,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductVariation::class);
     }
+
+    public function getFormattedPriceAttribute()
+    {
+        return '6000 руб.';
+    }
 }
