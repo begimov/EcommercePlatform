@@ -32,21 +32,14 @@ class ProductVariationTest extends TestCase
 
     public function test_returns_money_instance()
     {
-        $product = factory(Product::class)->create();
-
-        $productVariation = factory(ProductVariation::class)->create([
-            'product_id' => $product->id
-        ]);
+        $productVariation = factory(ProductVariation::class)->create();
 
         $this->assertInstanceOf(Money::class, $productVariation->price);
     }
 
     public function test_returns_formatted_price()
     {
-        $product = factory(Product::class)->create();
-
         $productVariation = factory(ProductVariation::class)->create([
-            'product_id' => $product->id,
             'price' => 12000
         ]);
 
