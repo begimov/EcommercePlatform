@@ -8,7 +8,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\Products\{
     Category,
-    Product
+    Product,
+    ProductVariation
 };
 
 class ProductTest extends TestCase
@@ -31,5 +32,20 @@ class ProductTest extends TestCase
         );
 
         $this->assertEquals($product->categories->first()->slug, $category->slug);
+    }
+
+    public function test_has_variations()
+    {
+        $product = factory(Product::class)->create();
+
+        $product->variations()->save(
+
+            factory(ProductVariation::class)->create([
+                'product_id' => $product->id
+            ])
+
+        );
+
+        $this->assertInstanceOf(ProductVariation::class, $product->variations->first());
     }
 }
