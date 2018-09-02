@@ -21,6 +21,11 @@ class Product extends Model
         return $this->hasMany(ProductVariation::class);
     }
 
+    public function getPriceAttribute($price)
+    {
+        return new \Money\Money($price, new \Money\Currency('RUB'));
+    }
+
     public function getFormattedPriceAttribute()
     {
         return '6000 руб.';
