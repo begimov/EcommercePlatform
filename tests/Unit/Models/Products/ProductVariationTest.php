@@ -45,4 +45,19 @@ class ProductVariationTest extends TestCase
 
         $this->assertEquals("120,00 ₽", $productVariation->formattedPrice);
     }
+
+    public function test_returns_base_price_if_variation_price_is_null()
+    {
+        $product = factory(Product::class)->create([
+            'price' => 100000
+        ]);
+
+        $product->variations()->save(
+            $productVariation = factory(ProductVariation::class)->create([
+                'price' => null
+            ])
+        );
+
+        $this->assertEquals($product->price->amount(), $productVariation->price->amount());
+    }
 }
