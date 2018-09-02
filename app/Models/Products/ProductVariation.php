@@ -19,4 +19,9 @@ class ProductVariation extends Model
     {
         return !is_null($price) ? new Money($price) : $this->product->price;
     }
+
+    public function priceDiffers()
+    {
+        return $this->price->amount() !== $this->product->price->amount();
+    }
 }
