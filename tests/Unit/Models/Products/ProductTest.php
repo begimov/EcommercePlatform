@@ -12,6 +12,8 @@ use App\Models\Products\{
     ProductVariation
 };
 
+use App\Services\App\Money;
+
 class ProductTest extends TestCase
 {
     public function test_retrieved_by_slug()
@@ -47,5 +49,21 @@ class ProductTest extends TestCase
         );
 
         $this->assertInstanceOf(ProductVariation::class, $product->variations->first());
+    }
+
+    public function test_returns_money_instance()
+    {
+        $product = factory(Product::class)->create();
+
+        $this->assertInstanceOf(Money::class, $product->price);
+    }
+
+    public function test_returns_formatted_price()
+    {
+        $product = factory(Product::class)->create([
+            'price' => 12000
+        ]);
+
+        $this->assertEquals("120,00 ₽", $product->formattedPrice);
     }
 }
