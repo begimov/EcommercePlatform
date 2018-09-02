@@ -15,7 +15,12 @@ class CreateProductVariationsTable extends Migration
     {
         Schema::create('product_variations', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('product_id')->unsigned()->index();
+            $table->string('name');
+            $table->integer('price')->nullable();
             $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
