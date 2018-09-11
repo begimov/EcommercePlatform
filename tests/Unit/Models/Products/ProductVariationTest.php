@@ -8,7 +8,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\Products\{
     Product,
-    ProductVariation
+    ProductVariation,
+    Stock
 };
 
 use App\Services\App\Money;
@@ -89,5 +90,16 @@ class ProductVariationTest extends TestCase
         );
 
         $this->assertTrue($productVariation->priceDiffers());
+    }
+
+    public function test_has_stocks()
+    {
+        $productVariation = factory(ProductVariation::class)->create();
+
+        $productVariation->stocks()->save(
+            factory(Stock::class)->make()
+        );
+
+        $this->assertInstanceOf(Stock::class, $productVariation->stocks->first());
     }
 }
