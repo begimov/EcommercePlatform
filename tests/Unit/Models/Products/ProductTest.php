@@ -88,4 +88,25 @@ class ProductTest extends TestCase
 
         $this->assertFalse($product->inStock());
     }
+
+    public function test_gets_stock_count()
+    {
+        $product = factory(Product::class)->create();
+
+        $product->variations()->save(
+
+            $productVariation = factory(ProductVariation::class)->create([
+                'product_id' => $product->id
+            ])
+
+        );
+
+        $productVariation->stocks()->save(
+            factory(Stock::class)->make([
+                'quantity' => $quantity = 2
+            ])
+        );
+
+        $this->assertEquals($quantity, $product->stockCount());
+    }
 }
