@@ -33,7 +33,7 @@ class ProductVariation extends Model
 
     public function stockCount()
     {
-        return $this->stock->pivot->stock;
+        return $this->stock->sum('pivot.stock');
     }
 
     public function inStock()
