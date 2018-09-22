@@ -124,7 +124,13 @@ class ProductVariationTest extends TestCase
             ])
         );
 
-        $this->assertEquals($quantity, $productVariation->stockCount());
+        $productVariation->stocks()->save(
+            factory(Stock::class)->make([
+                'quantity' => $quantity
+            ])
+        );
+
+        $this->assertEquals($quantity * 2, $productVariation->stockCount());
     }
     public function test_has_in_stock_pivot_data_from_view()
     {
