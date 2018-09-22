@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Products\Category;
-use  App\Repositories\Eloquent\Criteria\With;
+use App\Repositories\Eloquent\Criteria\With;
 use App\Http\Resources\Products\CategoryResource;
 use App\Repositories\Contracts\Products\CategoryRepository;
 

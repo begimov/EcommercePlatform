@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Products;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\Eloquent\Criteria\With;
 use App\Http\Resources\Products\ProductResource;
 use App\Http\Resources\Products\ProductIndexResource;
 use App\Repositories\Contracts\Products\ProductRepository;
@@ -26,7 +27,13 @@ class ProductController extends Controller
 
     public function show($slug)
     {
-        $product = $this->products->getByRouteKeyName($slug);
+        $relations = ['variations', 'variations.stock', 'variations.product'];
+
+        $product = $this->products
+            ->withCriteria([
+                new With($relations)
+            ])
+            ->getByRouteKeyName($slug);
 
         if (!$product) {
             return abort(404);

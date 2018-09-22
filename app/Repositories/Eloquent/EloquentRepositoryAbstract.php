@@ -30,7 +30,7 @@ abstract class EloquentRepositoryAbstract implements RepositoryInterface, Criter
     public function getByRouteKeyName($value)
     {       
         return $this->entity
-            ->where($this->entity->getRouteKeyName(), $value)
+            ->where($this->resolveEntity()->getRouteKeyName(), $value)
             ->first();
     }
 
