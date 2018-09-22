@@ -18,7 +18,12 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+        $relations = ['variations', 'variations.stock'];
+
         $products = $this->products
+            ->withCriteria([
+                new With($relations)
+            ])
             ->scope($request)
             ->paginate(10);
         
