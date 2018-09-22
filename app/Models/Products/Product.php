@@ -21,6 +21,11 @@ class Product extends Model
         });
     }
 
+    public function inStock()
+    {
+        return $this->stockCount() > 0;
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class);
