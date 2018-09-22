@@ -9,7 +9,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Products\{
     Category,
     Product,
-    ProductVariation
+    ProductVariation,
+    Stock
 };
 
 use App\Services\App\Money;
@@ -65,5 +66,26 @@ class ProductTest extends TestCase
         ]);
 
         $this->assertEquals("120,00 ₽", $product->formattedPrice);
+    }
+
+    public function test_checks_if_in_stock()
+    {
+        $product = factory(Product::class)->create();
+
+        $product->variations()->save(
+
+            $productVariation = factory(ProductVariation::class)->create([
+                'product_id' => $product->id
+            ])
+
+        );
+
+        $productVariation->stocks()->save(
+            factory(Stock::class)->make([
+                'quantity' => 0
+            ])
+        );
+
+        $this->assertFalse($product->inStock());
     }
 }
