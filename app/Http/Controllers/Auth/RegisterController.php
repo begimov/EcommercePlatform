@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class RegisterController extends Controller
 {
-    public function register()
+    public function register(Request $request)
     {
-        return 1;
+        $user = User::create($request->only('name', 'email', 'password'));
     }
 }
