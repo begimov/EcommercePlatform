@@ -12,7 +12,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
 
     Route::post('login', 'LoginController@login');
 
-    Route::get('me', 'MeController@index');
+    Route::get('me', 'MeController@index')->middleware(['auth:api']);
     
 });
 
