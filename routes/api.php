@@ -11,6 +11,8 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
     Route::post('register', 'RegisterController@register');
 
     Route::post('login', 'LoginController@login');
+
+    Route::get('me', 'MeController@index');
     
 });
 
