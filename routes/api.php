@@ -16,3 +16,4 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
     
 });
 
+Route::resource('carts', 'Carts\CartController');
