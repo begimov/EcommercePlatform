@@ -10,6 +10,18 @@ class CartController extends Controller
 {
     public function store(CartStoreRequest $request)
     {
-        return 1;
+        $products = $this->processProducts($request->products);
+
+        $request->user()->cart()->syncWithoutDetaching($products);
+    }
+
+    protected function processProducts(array $products)
+    {
+        return array_reduce($products, function($result, $product) {
+            $result[$product['id']] = [
+                'quantity' => $product['quantity']
+            ];
+            return $result;
+        }, []);
     }
 }
