@@ -9,16 +9,9 @@ use App\Services\App\Cart;
 
 class CartController extends Controller
 {
-    protected $cart;
-
-    public function __construct(Cart $cart)
+    public function store(CartStoreRequest $request, Cart $cart)
     {
-        $this->cart = $cart;
-    }
-
-    public function store(CartStoreRequest $request)
-    {
-        $this->cart->add($request->products);
+        $cart->add($request->products);
     }
 
     
