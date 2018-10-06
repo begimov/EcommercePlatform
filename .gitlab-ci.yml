@@ -19,9 +19,9 @@ unit_test:
     - cp .env.testing .env
     - composer install
     - php artisan key:generate
+    - php artisan jwt:secret
     - php artisan config:cache
     - php artisan migrate
-    - php artisan jwt:secret
     - vendor/bin/phpunit
 
 deploy_production:
