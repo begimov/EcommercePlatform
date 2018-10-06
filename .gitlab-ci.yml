@@ -4,10 +4,10 @@ services:
   - mysql:5.7
 
 variables:
-  MYSQL_DATABASE: ecommerceplatform
+  MYSQL_DATABASE: homestead
   MYSQL_ROOT_PASSWORD: secret
   DB_HOST: mysql
-  DB_USERNAME: homestead
+  DB_USERNAME: root
 
 stages:
   - test
