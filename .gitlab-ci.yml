@@ -1,13 +1,13 @@
 image: registry.gitlab.com/begimov/ecommerceplatform:latest
 
 services:
-  - mysql:5.7
+  - mysql:latest
 
 variables:
-  MYSQL_DATABASE: ecommerceplatform_testing
+  MYSQL_DATABASE: homestead
   MYSQL_ROOT_PASSWORD: secret
   DB_HOST: mysql
-  DB_USERNAME: homestead
+  DB_USERNAME: root
 
 stages:
   - test
@@ -16,9 +16,11 @@ stages:
 unit_test:
   stage: test
   script:
-    - cp .env.example .env
+    - cp .env.testing .env
     - composer install
     - php artisan key:generate
+    - php artisan config:cache
+    - php artisan migrate
     - vendor/bin/phpunit
 
 deploy_production:
