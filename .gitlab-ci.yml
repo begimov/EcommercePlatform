@@ -21,6 +21,7 @@ unit_test:
     - php artisan key:generate
     - php artisan config:cache
     - php artisan migrate
+    - php artisan jwt:secret
     - vendor/bin/phpunit
 
 deploy_production:
