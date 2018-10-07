@@ -34,6 +34,7 @@ deploy_production:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - cd ~/.composer/vendor/bin/
     - ls -lah
+    - ~/.composer/vendor/bin/envoy
     - ~/.composer/vendor/bin/envoy run deploy
   environment:
     name: production
