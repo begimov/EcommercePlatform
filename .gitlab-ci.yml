@@ -32,8 +32,7 @@ deploy_production:
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - cd ~/.composer/vendor/bin/
-    - ls -lah
+    - ls -lah ~/.composer/vendor/bin/
     - ~/.composer/vendor/bin/envoy
     - ~/.composer/vendor/bin/envoy run deploy
   environment:
