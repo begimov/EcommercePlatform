@@ -1,4 +1,4 @@
-@servers(['web' => '95.213.191.138'])
+@servers(['web' => 'deployer@95.213.191.138'])
 
 @setup
     $repository = 'git@gitlab.com:begimov/EcommercePlatform.git';
