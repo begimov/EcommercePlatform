@@ -35,5 +35,5 @@
     ln -nfs {{ $app_dir }}/.env {{ $new_release_dir }}/.env
 
     echo 'Linking current release'
-    ln -nfs {{ $new_release_dir }}/* {{ $app_dir }}/current/
+    ln -nfs {{ $new_release_dir }} {{ $app_dir }}/current
 @endtask
