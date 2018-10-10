@@ -22,10 +22,25 @@ class Cart
     protected function processProducts(array $products)
     {
         return array_reduce($products, function($result, $product) {
-            $result[$product['id']] = [
-                'quantity' => $product['quantity']
+
+            $result[$productId = $product['id']] = [
+
+                'quantity' => $product['quantity'] + $this->getCurrentQuantity($productId)
+
             ];
+
             return $result;
+
         }, []);
+    }
+
+    protected function getCurrentQuantity($productId)
+    {
+        if ($product = $this->user->cart()->where('product_variation_id', $productId)->first()) {
+
+            return $product->pivot->quantity;
+
+        }
+        return 0;
     }
 }
