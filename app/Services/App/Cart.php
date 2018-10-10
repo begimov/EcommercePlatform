@@ -18,6 +18,14 @@ class Cart
         $this->user->cart()
             ->syncWithoutDetaching($this->processProducts($products));
     }
+
+    public function update($productId, $quantity)
+    {
+        $this->user->cart()
+            ->updateExistingPivot($productId, [
+                'quantity' => $quantity
+            ]);
+    }
     
     protected function processProducts(array $products)
     {
