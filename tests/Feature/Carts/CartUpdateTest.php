@@ -6,6 +6,9 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
+use App\Models\Products\{
+    ProductVariation
+};
 
 class CartUpdateTest extends TestCase
 {
@@ -48,5 +51,25 @@ class CartUpdateTest extends TestCase
         $this->jsonAs($user, 'PATCH', 'api/carts/1', [
                 'quantity' => 0
             ])->assertJsonValidationErrors(['quantity']);
+    }
+
+    public function test_cart_can_be_updated()
+    {
+        $user = factory(User::class)->create();
+
+        $user->cart()->attach(
+            $productVariation = factory(ProductVariation::class)->create(),[
+                'quantity' => 1
+            ]);
+
+        $this->jsonAs($user, 'PATCH', "api/carts/{$productVariation->id}", [
+                'quantity' => $q = 10
+            ]);
+        
+        $this->assertDatabaseHas('cart_user', [
+            'product_variation_id' => $productVariation->id,
+            'quantity' => $q,
+            'user_id' => $user->id
+        ]);
     }
 }
