@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Carts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Carts\CartStoreRequest;
+use App\Http\Requests\Carts\CartUpdateRequest;
 use App\Services\App\Cart;
 use App\Repositories\Contracts\Products\ProductVariationRepository;
 
@@ -22,7 +23,7 @@ class CartController extends Controller
         $cart->add($request->products);
     }
 
-    public function update(Request $request, $productVariationId, Cart $cart)
+    public function update(CartUpdateRequest $request, $productVariationId, Cart $cart)
     {
         $cart->update($productVariationId, $request->quantity);
     }
