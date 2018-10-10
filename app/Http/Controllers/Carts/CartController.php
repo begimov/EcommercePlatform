@@ -15,7 +15,6 @@ class CartController extends Controller
     public function __construct(ProductVariationRepository $productVariations)
     {
         $this->productVariations = $productVariations;
-        dd($productVariations);
     }
 
     public function store(CartStoreRequest $request, Cart $cart)
@@ -23,8 +22,8 @@ class CartController extends Controller
         $cart->add($request->products);
     }
 
-    public function update($productVariationId)
+    public function update(Request $request, $productVariationId)
     {
-        dd($productVariationId);
+        dd($this->productVariations->findById($productVariationId));
     }
 }

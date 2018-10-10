@@ -27,6 +27,11 @@ abstract class EloquentRepositoryAbstract implements RepositoryInterface, Criter
         return $this->entity->paginate($by);
     }
 
+    public function findById($id)
+    {
+        return $this->entity->find($id);
+    }
+
     public function getByRouteKeyName($value)
     {       
         return $this->entity
