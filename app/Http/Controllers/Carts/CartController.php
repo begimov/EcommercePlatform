@@ -25,6 +25,10 @@ class CartController extends Controller
 
     public function update(CartUpdateRequest $request, $productVariationId, Cart $cart)
     {
+        $productVariation = $this->productVariations->findById($productVariationId);
+
+        if (!$productVariation) return abort(404);
+
         $cart->update($productVariationId, $request->quantity);
     }
 }
