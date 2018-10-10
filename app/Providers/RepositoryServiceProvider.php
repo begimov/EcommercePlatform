@@ -5,11 +5,13 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Contracts\Products\{
     CategoryRepository,
-    ProductRepository
+    ProductRepository,
+    ProductVariationRepository
 };
 use App\Repositories\Eloquent\Products\{
     EloquentCategoryRepository,
-    EloquentProductRepository
+    EloquentProductRepository,
+    EloquentProductVariationRepository
 };
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -34,5 +36,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CategoryRepository::class, EloquentCategoryRepository::class);
 
         $this->app->bind(ProductRepository::class, EloquentProductRepository::class);
+
+        $this->app->bind(ProductVariationRepository::class, EloquentProductVariationRepository::class);
     }
 }
