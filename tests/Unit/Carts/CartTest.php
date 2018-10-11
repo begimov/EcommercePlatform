@@ -71,4 +71,23 @@ class CartTest extends TestCase
 
         $this->assertEquals($q, $user->cart()->first()->pivot->quantity);
     }
+
+    public function test_deleting_from_cart()
+    {
+        $cart = new Cart(
+            $user = factory(User::class)->create()
+        );
+
+        $productVariation1 = factory(ProductVariation::class)->create();
+        $productVariation2 = factory(ProductVariation::class)->create();
+
+        $cart->add([
+            ['id' => $productVariation1->id, 'quantity' => 10],
+            ['id' => $productVariation2->id, 'quantity' => 10]
+        ]);
+
+        $cart->delete($productVariation1->id);
+
+        $this->assertCount(1, $user->cart);
+    }
 }
