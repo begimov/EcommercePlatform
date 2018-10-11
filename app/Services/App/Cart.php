@@ -31,6 +31,11 @@ class Cart
     {
         $this->user->cart()->detach($productId);
     }
+
+    public function empty()
+    {
+        $this->user->cart()->detach();
+    }
     
     protected function processProducts(array $products)
     {
