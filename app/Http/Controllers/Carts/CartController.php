@@ -31,4 +31,13 @@ class CartController extends Controller
 
         $cart->update($productVariationId, $request->quantity);
     }
+
+    public function destroy($productVariationId, Cart $cart)
+    {
+        $productVariation = $this->productVariations->findById($productVariationId);
+
+        if (!$productVariation) return abort(404);
+
+        $cart->delete($productVariationId);
+    }
 }
