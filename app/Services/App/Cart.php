@@ -51,6 +51,11 @@ class Cart
 
         return new Money($subtotal);
     }
+
+    public function total()
+    {
+        return $this->subtotal();
+    }
     
     protected function processProducts(array $products)
     {
