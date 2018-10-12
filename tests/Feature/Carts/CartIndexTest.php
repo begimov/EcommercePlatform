@@ -30,4 +30,14 @@ class CartIndexTest extends TestCase
         $this->jsonAs($user, 'GET', 'api/carts')
             ->assertJsonCount(1, 'data.products');
     }
+
+    public function test_if_empty_cart_meta_data_is_present()
+    {
+        $user = factory(User::class)->create();
+
+        $this->jsonAs($user, 'GET', 'api/carts')
+            ->assertJsonFragment([
+                'empty' => true
+            ]);
+    }
 }
