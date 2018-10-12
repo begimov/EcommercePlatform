@@ -40,4 +40,28 @@ class CartIndexTest extends TestCase
                 'empty' => true
             ]);
     }
+
+    public function test_subtotal_is_present()
+    {
+        $user = factory(User::class)->create();
+
+        $this->jsonAs($user, 'GET', 'api/carts')
+            ->assertJsonStructure([
+                'meta' => [
+                    'subtotal'
+                ]
+            ]);
+    }
+
+    public function test_total_is_present()
+    {
+        $user = factory(User::class)->create();
+
+        $this->jsonAs($user, 'GET', 'api/carts')
+            ->assertJsonStructure([
+                'meta' => [
+                    'total'
+                ]
+            ]);
+    }
 }
