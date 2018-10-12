@@ -19,13 +19,16 @@ class CartController extends Controller
         $this->productVariations = $productVariations;
     }
 
-    public function index(Request $request)
+    public function index(Request $request, Cart $cart)
     {
         $request->user()->load([
                 'cart.product', 'cart.product.variations.stock', 'cart.stock'
             ]);
 
-        return new CartResource($request->user());
+        return (new CartResource($request->user()))
+            ->additional([
+                'meta' => $this->getMetaData($cart)
+            ]);
     }
 
     public function store(CartStoreRequest $request, Cart $cart)
@@ -49,5 +52,12 @@ class CartController extends Controller
         if (!$productVariation) return abort(404);
 
         $cart->delete($productVariationId);
+    }
+
+    protected function getMetaData(Cart $cart)
+    {
+        return [
+            'empty' => $cart->isEmpty()
+        ];
     }
 }
