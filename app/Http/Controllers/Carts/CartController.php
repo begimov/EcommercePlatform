@@ -57,7 +57,8 @@ class CartController extends Controller
     protected function getMetaData(Cart $cart)
     {
         return [
-            'empty' => $cart->isEmpty()
+            'empty' => $cart->isEmpty(),
+            'subtotal' => $cart->subtotal()->formatted()
         ];
     }
 }
