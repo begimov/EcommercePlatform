@@ -8,6 +8,7 @@ use App\Http\Requests\Carts\CartStoreRequest;
 use App\Http\Requests\Carts\CartUpdateRequest;
 use App\Services\App\Cart;
 use App\Repositories\Contracts\Products\ProductVariationRepository;
+use App\Http\Resources\Carts\CartResource;
 
 class CartController extends Controller
 {
@@ -16,6 +17,11 @@ class CartController extends Controller
     public function __construct(ProductVariationRepository $productVariations)
     {
         $this->productVariations = $productVariations;
+    }
+
+    public function index(Request $request)
+    {
+        return new CartResource($request->user());
     }
 
     public function store(CartStoreRequest $request, Cart $cart)
