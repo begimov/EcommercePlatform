@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Carts;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Carts\CartProductVariationResource;
 
 class CartResource extends JsonResource
 {
@@ -15,7 +16,7 @@ class CartResource extends JsonResource
     public function toArray($request)
     {
         return [
-            //
+            'products' => CartProductVariationResource::collection($this->cart)
         ];
     }
 }

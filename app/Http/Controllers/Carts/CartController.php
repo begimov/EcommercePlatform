@@ -21,6 +21,10 @@ class CartController extends Controller
 
     public function index(Request $request)
     {
+        $request->user()->load([
+                'cart.product', 'cart.product.variations.stock', 'cart.stock'
+            ]);
+
         return new CartResource($request->user());
     }
 
