@@ -8,11 +8,14 @@ use App\Repositories\Contracts\Products\{
     ProductRepository,
     ProductVariationRepository
 };
+use App\Repositories\Contracts\Locations\AddressRepository;
+
 use App\Repositories\Eloquent\Products\{
     EloquentCategoryRepository,
     EloquentProductRepository,
     EloquentProductVariationRepository
 };
+use App\Repositories\Eloquent\Locations\EloquentAddressRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -38,5 +41,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProductRepository::class, EloquentProductRepository::class);
 
         $this->app->bind(ProductVariationRepository::class, EloquentProductVariationRepository::class);
+
+        $this->app->bind(AddressRepository::class, EloquentAddressRepository::class);
     }
 }
