@@ -114,7 +114,7 @@ class ProductVariationTest extends TestCase
         $this->assertInstanceOf(ProductVariation::class, $productVariation->stock->first());
     }
 
-    public function test_has_stock_count_pivot_data3_from_view()
+    public function test_has_stock_count_pivot_data_from_view()
     {
         $productVariation = factory(ProductVariation::class)->create();
 
@@ -132,6 +132,7 @@ class ProductVariationTest extends TestCase
 
         $this->assertEquals($quantity * 2, $productVariation->stockCount());
     }
+
     public function test_has_in_stock_pivot_data_from_view()
     {
         $productVariation = factory(ProductVariation::class)->create();
@@ -143,5 +144,20 @@ class ProductVariationTest extends TestCase
         );
 
         $this->assertFalse($productVariation->inStock());
+    }
+
+    public function test_available_stock()
+    {
+        $productVariation = factory(ProductVariation::class)->create();
+
+        $productVariation->stocks()->save(
+            factory(Stock::class)->make([
+                'quantity' => $quantity = 50
+            ])
+        );
+
+        $this->assertEquals($quantity, $productVariation->availableStock(145));
+
+        $this->assertEquals(1, $productVariation->availableStock(1));
     }
 }
