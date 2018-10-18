@@ -25,6 +25,8 @@ class AddressController extends Controller
 
     public function store(Request $request)
     {
-        //
+       return new AddressResource(
+           $this->addresses->store($request)
+        );
     }
 }
