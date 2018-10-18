@@ -8,6 +8,8 @@ use App\Services\App\Money;
 class Cart
 {
     protected $user;
+
+    protected $hasChanged = false;
     
     public function __construct(User $user)
     {
@@ -63,10 +65,20 @@ class Cart
 
             $availableQuantity = $product->availableStock($requestedQuantity = $product->pivot->quantity);
 
-            $product->pivot->update(
-                ['quantity' => $availableQuantity]
-            );
+            if($availableQuantity != $requestedQuantity) {
+
+                $this->hasChanged = true;
+
+                $product->pivot->update(
+                    ['quantity' => $availableQuantity]
+                );
+            }
         });
+    }
+
+    public function hasChanged()
+    {
+        return $this->hasChanged;
     }
     
     protected function processProducts(array $products)
