@@ -64,4 +64,16 @@ class CartIndexTest extends TestCase
                 ]
             ]);
     }
+
+    public function test_changed_flag_is_present()
+    {
+        $user = factory(User::class)->create();
+
+        $this->jsonAs($user, 'GET', 'api/carts')
+            ->assertJsonStructure([
+                'meta' => [
+                    'changed'
+                ]
+            ]);
+    }
 }
