@@ -56,6 +56,18 @@ class Cart
     {
         return $this->subtotal();
     }
+
+    public function sync()
+    {
+        $this->user->cart->each(function($product) {
+
+            $availableQuantity = $product->availableStock($requestedQuantity = $product->pivot->quantity);
+
+            $product->pivot->update(
+                ['quantity' => $availableQuantity]
+            );
+        });
+    }
     
     protected function processProducts(array $products)
     {

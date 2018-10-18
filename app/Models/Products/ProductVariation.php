@@ -41,6 +41,11 @@ class ProductVariation extends Model
         return $this->stockCount() > 0;
     }
 
+    public function availableStock($quantity)
+    {
+        return min($this->stockCount(), $quantity);
+    }
+
     public function getPriceAttribute($price)
     {
         return !is_null($price) ? new Money($price) : $this->product->price;

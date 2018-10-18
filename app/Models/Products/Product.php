@@ -26,11 +26,6 @@ class Product extends Model
         return $this->stockCount() > 0;
     }
 
-    public function minStock($quantity)
-    {
-        return min($this->stockCount(), $quantity);
-    }
-
     public function categories()
     {
         return $this->belongsToMany(Category::class);
