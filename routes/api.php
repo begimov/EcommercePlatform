@@ -20,4 +20,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     Route::resource('carts', 'Carts\CartController');
 
+    Route::resource('addresses', 'Locations\AddressController');
+
 });
