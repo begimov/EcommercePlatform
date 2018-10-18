@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Locations\Country;
 
 class CountriesTableSeeder extends Seeder
 {
@@ -23,5 +24,12 @@ class CountriesTableSeeder extends Seeder
             'Таджикистан' => 'TJ',
             'Узбекистан' => 'UZ',
         ];
+
+        collect($countries)->each(function ($code, $name) {
+            Country::create([
+                'name' => $name,
+                'code' => $code
+            ]);
+        });
     }
 }
