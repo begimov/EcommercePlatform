@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Locations\Address;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Products\ProductVariation;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -63,5 +64,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(ProductVariation::class, 'cart_user')
             ->withPivot('quantity')
             ->withTimestamps();
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
     }
 }
