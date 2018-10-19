@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Locations;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Locations\AddressResource;
+use App\Http\Requests\Locations\AddressStoreRequest;
 use App\Repositories\Contracts\Locations\AddressRepository;
 
 class AddressController extends Controller
@@ -23,7 +24,7 @@ class AddressController extends Controller
         );
     }
 
-    public function store(Request $request)
+    public function store(AddressStoreRequest $request)
     {
        return new AddressResource(
            $this->addresses->store($request)
